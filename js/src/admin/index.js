@@ -25,12 +25,6 @@ app.initializers.add('justoverclock/adsense-manager', () => {
       label: 'Ads - Show',
       type: 'boolean'
     })
-    .registerSetting(function () {
-      return <div className="Form-group">
-        <label>Adsense Code for head tags</label>
-        <textarea className="FormControl" bidi={this.setting('adsense-manager.ads.generatedCode')}></textarea>
-      </div>;
-    })
     .registerSetting({
       setting: 'adsense-manager.ads.postsInterval',
       label: 'Ads - Posts interval',
