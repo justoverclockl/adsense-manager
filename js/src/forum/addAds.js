@@ -54,11 +54,15 @@ export default function () {
 
   extend(IndexPage.prototype, 'sidebarItems', function (items) {
     const advertisement = app.forum.attribute('adsense-manager.ads.sidebar');
-
-    if (advertisement && !(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent))) {
-      // TODO: this doesn't work, no js is run
-      items.add('adsense-manager-ad', m.trust(advertisement));
+    function injectAds (){
+        $(".adsense-inject").each(function () {
+          $(this).append(advertisement);
+        });
     }
+    console.log(advertisement)
+      items.add('adsense-manager-ad', m("div", {className:"adsense-inject"},
+       injectAds()
+      ));
   });
 }
 
