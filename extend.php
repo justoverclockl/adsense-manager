@@ -14,12 +14,17 @@
 namespace Justoverclock\AdsenseManager;
 
 use Flarum\Extend;
+use Flarum\Frontend\Document;
 use Flarum\Api\Event\Serializing;
 
 return [
     (new Extend\Frontend('forum'))
         ->js(__DIR__.'/js/dist/forum.js')
-        ->css(__DIR__.'/less/forum.less'),
+        ->css(__DIR__.'/less/forum.less')
+        ->content(function (Document $document) {
+            $adsCode = resolve(\Flarum\Settings\SettingsRepositoryInterface::class)->get('adsense-manager.ads.generatedCode');
+            $document->head[] = $adsCode;
+        }),
     (new Extend\Frontend('admin'))
         ->js(__DIR__.'/js/dist/admin.js')
         ->css(__DIR__.'/less/admin.less'),
