@@ -42,10 +42,4 @@ app.initializers.add('justoverclock/adsense-manager', () => {
         <textarea className="FormControl" bidi={this.setting('adsense-manager.ads.betweenPosts')}></textarea>
       </div>;
     })
-    .registerSetting(function () {
-      return <div className="Form-group">
-        <label>Ads - Sidebar</label>
-        <textarea className="FormControl" bidi={this.setting('adsense-manager.ads.sidebar')}></textarea>
-      </div>;
-    })
 });

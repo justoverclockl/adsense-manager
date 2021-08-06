@@ -34,5 +34,4 @@ return [
         ->serializeToForum('adsense-manager.ads.show', 'adsense-manager.ads.show')
         ->serializeToForum('adsense-manager.ads.postsInterval', 'adsense-manager.ads.postsInterval')
         ->serializeToForum('adsense-manager.ads.betweenPosts', 'adsense-manager.ads.betweenPosts')
-        ->serializeToForum('adsense-manager.ads.sidebar', 'adsense-manager.ads.sidebar'),
 ];
