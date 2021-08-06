@@ -4,6 +4,8 @@
  * This file is part of justoverclock/adsense-manager.
  *
  * Copyright (c) 2021 Marco Colia.
+ * https://flarum.it
+ * based on tweaked version from Matteo Contrini
  *
  * For the full copyright and license information, please view the LICENSE.md
  * file that was distributed with this source code.
@@ -20,8 +22,8 @@ return [
         ->js(__DIR__.'/js/dist/forum.js')
         ->css(__DIR__.'/less/forum.less')
         ->content(function (Document $document) {
-            $document->head[] = '<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6757388076145452"
-     crossorigin="anonymous"></script>';
+            $adsCode = resolve(\Flarum\Settings\SettingsRepositoryInterface::class)->get('adsense-manager.ads.generatedCode');
+            $document->head[] = $adsCode;
         }),
     (new Extend\Frontend('admin'))
         ->js(__DIR__.'/js/dist/admin.js')
