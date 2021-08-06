@@ -13,6 +13,7 @@ import {extend} from 'flarum/common/extend';
 import app from 'flarum/forum/app';
 import PostStream from 'flarum/forum/components/PostStream';
 import IndexPage from 'flarum/forum/components/IndexPage';
+import WelcomeHero from "flarum/forum/components/WelcomeHero";
 
 export default function () {
   extend(PostStream.prototype, 'view', function (component) {
@@ -48,6 +49,20 @@ export default function () {
       });
     }
   });
+  extend(IndexPage.prototype, 'view', function (vdom) {
+    if (vdom.children && vdom.children.splice) {
+      function injectAds (){
+        const advertisement = app.forum.attribute('adsense-manager.ads.betweenPosts');
+        $(".adsense-inject-topheader").each(function () {
+          $(this).append(advertisement);
+        });
+      }
+      const insert = m("div", {className:"adsense-inject-topheader"},
+        injectAds()
+      );
+      vdom.children.splice(1, 0, insert);
+    }
+  });
 
   extend(PostStream.prototype, 'oncreate', evalAdsJs);
   extend(PostStream.prototype, 'onupdate', evalAdsJs);
@@ -59,7 +74,6 @@ export default function () {
           $(this).append(advertisement);
         });
     }
-    console.log(advertisement)
       items.add('adsense-manager-ad', m("div", {className:"adsense-inject"},
        injectAds()
       ));
